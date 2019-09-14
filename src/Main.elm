@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Main exposing (ncert, ncertm)
 
 import Browser
 import Html exposing (Html, div, h1, h3, img, text)
@@ -10,12 +10,31 @@ import Html.Attributes exposing (src)
 
 
 type alias Model =
-    { n : List Int }
+    { k : List Int }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { n = [ 8 ] }, Cmd.none )
+    ( { k = [ 8 ] }, Cmd.none )
+
+
+ncert : Float -> Float -> Float
+ncert i n =
+    let
+        v =
+            1 / (1 + i)
+    in
+    (1 - v ^ n) / (i * v)
+
+
+ip : Float -> Float -> Float
+ip n i =
+    (1 + i) ^ (1 / n) - 1
+
+
+ncertm : Float -> Float -> Float -> Float
+ncertm m i n =
+    ncert (ip m i) (m * n) / m
 
 
 
@@ -42,7 +61,7 @@ view model =
         , h1 [] [ text "Your Elm App is working. This is a UI test." ]
         , h3 [] [ text "Your Elm App is working. This is a UI test." ]
         , img [ src "/logo.svg" ] []
-        , h3 [] [ Maybe.withDefault 5 (List.head model.n) |> String.fromInt |> text ]
+        , h3 [] [ Maybe.withDefault 5 (List.head model.k) |> String.fromInt |> text ]
         ]
 
 
