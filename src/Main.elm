@@ -10,12 +10,12 @@ import Html.Attributes exposing (src)
 
 
 type alias Model =
-    { n : Int }
+    { n : List Int }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { n = 8 }, Cmd.none )
+    ( { n = [ 8 ] }, Cmd.none )
 
 
 
@@ -42,7 +42,7 @@ view model =
         , h1 [] [ text "Your Elm App is working. This is a UI test." ]
         , h3 [] [ text "Your Elm App is working. This is a UI test." ]
         , img [ src "/logo.svg" ] []
-        , h3 [] [ text (String.fromInt model.n) ]
+        , h3 [] [ Maybe.withDefault 5 (List.head model.n) |> String.fromInt |> text ]
         ]
 
 
