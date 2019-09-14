@@ -1,4 +1,4 @@
-module Main exposing (ncert, ncertm)
+module Main exposing (ncert, ncert12, ncertm)
 
 import Browser
 import Html exposing (Html, div, h1, h3, img, text)
@@ -18,13 +18,19 @@ init =
     ( { k = [ 8 ] }, Cmd.none )
 
 
+v : Float -> Float
+v i =
+    1 / (1 + i)
+
+
+d : Float -> Float
+d i =
+    i * v i
+
+
 ncert : Float -> Float -> Float
 ncert i n =
-    let
-        v =
-            1 / (1 + i)
-    in
-    (1 - v ^ n) / (i * v)
+    (1 - v i ^ n) / d i
 
 
 ip : Float -> Float -> Float
@@ -35,6 +41,11 @@ ip n i =
 ncertm : Float -> Float -> Float -> Float
 ncertm m i n =
     ncert (ip m i) (m * n) / m
+
+
+ncert12 : Float -> Float -> Float
+ncert12 i n =
+    ncert (ip 12 i) (12 * n) / 12
 
 
 
