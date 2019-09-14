@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, div, h1, img, text)
+import Html exposing (Html, div, h1, h3, img, text)
 import Html.Attributes exposing (src)
 
 
@@ -40,6 +40,8 @@ view model =
     div []
         [ img [ src "/logo.svg" ] []
         , h1 [] [ text "Your Elm App is working. This is a UI test." ]
+        , h3 [] [ text "Your Elm App is working. This is a UI test." ]
+        , img [ src "/logo.svg" ] []
         ]
 
 
