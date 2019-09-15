@@ -18,34 +18,34 @@ init =
     ( { k = [ 8 ] }, Cmd.none )
 
 
-v : Float -> Float
+v : number -> number
 v i =
-    1 / (1 + i)
+    (1 + i) ^ -1
 
 
-d : Float -> Float
+d : number -> number
 d i =
     i * v i
 
 
-ncert : Float -> Float -> Float
+ncert : number -> number -> number
 ncert i n =
-    (1 - v i ^ n) / d i
+    (1 - v i ^ n) * d i ^ -1
 
 
-ip : Float -> Float -> Float
+ip : number -> number -> number
 ip n i =
-    (1 + i) ^ (1 / n) - 1
+    (1 + i) ^ (n ^ -1) - 1
 
 
-ncertm : Float -> Float -> Float -> Float
+ncertm : number -> number -> number -> number
 ncertm m i n =
-    ncert (ip m i) (m * n) / m
+    ncert (ip m i) (m * n) * m ^ -1
 
 
-ncert12 : Float -> Float -> Float
+ncert12 : number -> number -> number
 ncert12 i n =
-    ncert (ip 12 i) (12 * n) / 12
+    ncert (ip 12 i) (12 * n) * 12 ^ -1
 
 
 
@@ -73,6 +73,8 @@ view model =
         , h3 [] [ text "Your Elm App is working. This is a UI test." ]
         , img [ src "/logo.svg" ] []
         , h3 [] [ Maybe.withDefault 5 (List.head model.k) |> String.fromInt |> text ]
+        , h3 [] [ ncert 0.08 10 |> String.fromFloat |> text ]
+        , h3 [] [ ncertm 12 0.08 10 |> String.fromFloat |> text ]
         ]
 
 
