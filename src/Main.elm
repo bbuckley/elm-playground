@@ -34,6 +34,21 @@ init =
 ---- UPDATE ----
 
 
+parseInterest : String -> Maybe Float
+parseInterest userInput =
+    String.toFloat userInput
+        |> Maybe.andThen toValidInterest
+
+
+toValidInterest : Float -> Maybe Float
+toValidInterest i =
+    if i >= 0 && i <= 1 then
+        Just i
+
+    else
+        Nothing
+
+
 type Msg
     = NumeratorInput String
     | DenominatorInput String
@@ -45,7 +60,7 @@ update msg model =
         NumeratorInput s ->
             ( { model
                 | numeratorString = s
-                , numerator = Maybe.withDefault model.numerator (String.toFloat s)
+                , numerator = parseInterest s |> Maybe.withDefault model.numerator
               }
             , Cmd.none
             )
