@@ -1,8 +1,9 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser
-import Html exposing (Html, div, h1, img, text)
-import Html.Attributes exposing (src)
+import Html exposing (Html, div, h1, hr, p, text)
+import Html.Events exposing (onClick)
+import Random
 
 
 
@@ -10,12 +11,12 @@ import Html.Attributes exposing (src)
 
 
 type alias Model =
-    {}
+    List Float
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( {}, Cmd.none )
+    ( [], Cmd.none )
 
 
 
@@ -23,12 +24,18 @@ init =
 
 
 type Msg
-    = NoOp
+    = AddRandomNumber
+    | Roll Float
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        AddRandomNumber ->
+            ( model, Random.generate Roll (Random.float 0 2) )
+
+        Roll float ->
+            ( float :: model, Cmd.none )
 
 
 
@@ -38,8 +45,11 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ img [ src "/logo.svg" ] []
-        , h1 [] [ text "Your Elm App is working" ]
+        [ h1 [ onClick AddRandomNumber ] [ text "Your Elm App is working - click to add rand" ]
+        , hr [] []
+        , div []
+            [ div [] (List.map (\f -> p [] [ String.fromFloat f |> text ]) model)
+            ]
         ]
 
 
