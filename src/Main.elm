@@ -32,7 +32,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         AddRandomNumber ->
-            ( model, Random.generate Roll (Random.float 0 2) )
+            ( model, Random.generate Roll (Random.float 1.8 2) )
 
         Roll float ->
             ( float :: model, Cmd.none )
