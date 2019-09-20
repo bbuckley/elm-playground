@@ -2,6 +2,7 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser
 import Html exposing (Html, div, h1, hr, p, text)
+import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 import Random
 
@@ -26,11 +27,15 @@ init =
 type Msg
     = AddRandomNumber
     | Roll Float
+    | DelRandomNumber Float
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        DelRandomNumber f ->
+            ( model |> List.filter ((/=) f), Cmd.none )
+
         AddRandomNumber ->
             ( model, Random.generate Roll (Random.float 1.8 2) )
 
@@ -45,10 +50,10 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ h1 [ onClick AddRandomNumber ] [ text "Your Elm App is working - click to add rand" ]
+        [ h1 [ onClick AddRandomNumber, style "cursor" "pointer" ] [ text "Your Elm App is working - click to add rand" ]
         , hr [] []
         , div []
-            [ div [] (List.map (\f -> p [] [ String.fromFloat f |> text ]) model)
+            [ div [] (List.map (\f -> p [ onClick (DelRandomNumber f), style "cursor" "pointer" ] [ String.fromFloat f |> text ]) model)
             ]
         ]
 
