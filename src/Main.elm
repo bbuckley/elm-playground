@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Color exposing (Color, red)
-import Html exposing (Html, div, h1, h3, img, input, span, text)
+import Html exposing (Html, button, div, form, h1, h3, hr, img, input, label, p, span, text)
 import Html.Attributes exposing (placeholder, src, style, type_, value)
 import Html.Events exposing (onInput)
 
@@ -88,6 +88,13 @@ view model =
         , h1 [] [ text ("numerator / denominator is " ++ String.fromFloat (model.numerator / model.denominator)) ]
         , h3 [] [ input [ type_ "text", placeholder "enter numerator", value model.numeratorString, onInput NumeratorInput ] [] ]
         , h3 [] [ input [ type_ "text", placeholder "enter denominator", value model.denominatorString, onInput DenominatorInput ] [] ]
+        , hr [] []
+        , form []
+            [ p [] [ input [ type_ "text", placeholder "enter numerator", value model.numeratorString ] [] ]
+            , p [] [ input [ type_ "text", placeholder "enter denominator", value model.denominatorString ] [] ]
+            , label [] []
+            , button [] []
+            ]
         ]
 
 
