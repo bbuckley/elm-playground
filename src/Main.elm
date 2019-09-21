@@ -47,14 +47,17 @@ update msg model =
 ---- VIEW ----
 
 
+s : List (Html.Attribute Msg)
+s =
+    [ style "cursor" "pointer", style "border" "solid" ]
+
+
 view : Model -> Html Msg
 view model =
     div []
         [ h1 [ onClick AddRandomNumber, style "cursor" "pointer" ] [ text "Your Elm App is working - click to add rand" ]
         , hr [] []
-        , div []
-            [ div [] (List.map (\f -> p [ onClick (DelRandomNumber f), style "cursor" "pointer" ] [ String.fromFloat f |> text ]) model)
-            ]
+        , div [] (List.map (\f -> p (onClick (DelRandomNumber f) :: s) [ String.fromFloat f |> text ]) model)
         ]
 
 
