@@ -25,7 +25,13 @@ img {
   max-width: 200px;
 }
 
-p {
-  color: green;
-  opacity: .1;
+
+#new {
+  color: red;
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }

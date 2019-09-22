@@ -57,7 +57,7 @@ view model =
     div []
         [ h1 [ onClick AddRandomNumber, style "cursor" "pointer" ] [ text "Your Elm App is working - click to add rand" ]
         , hr [] []
-        , div [] (List.map (\f -> p (onClick (DelRandomNumber f) :: s) [ String.fromFloat f |> text ]) model)
+        , div [][div [] (List.map (\f -> p (onClick (DelRandomNumber f) :: s) [ String.fromFloat f |> text ]) model)]
         ]
 
 
