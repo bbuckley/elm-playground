@@ -27,11 +27,11 @@ img {
 
 
 #new {
-  color: red;
-  animation: fadein 2s;
+  animation: fadein 1.5s;
+  color: green;
 }
 
 @keyframes fadein {
-    from { opacity: 0; }
+    from { opacity: 0; background-color: yellow;}
     to   { opacity: 1; }
 }
