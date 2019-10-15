@@ -70,8 +70,8 @@ s =
     [ style "cursor" "pointer", style "border" "solid" ]
 
 
-xxx : Float -> Maybe Float -> Bool
-xxx fl mf =
+shouldBeMarkedNew : Float -> Maybe Float -> Bool
+shouldBeMarkedNew fl mf =
     case mf of
         Nothing ->
             False
@@ -91,7 +91,7 @@ mark_id : Model -> List (Html Msg)
 mark_id model =
     List.map
         (\f ->
-            if xxx f model.new then
+            if shouldBeMarkedNew f model.new then
                 -- (f, True)
                 p (id "new" :: (onClick (DelRandomNumber f) :: s)) [ String.fromFloat f |> text ]
 
