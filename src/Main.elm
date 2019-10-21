@@ -38,7 +38,7 @@ update msg model =
         DelRandomNumber f ->
             ( { model
                 | list = model.list |> List.filter ((/=) f)
-                , new =
+                , new = 
                     if List.all ((/=) f) model.list then
                         -- model.new
                         Nothing
